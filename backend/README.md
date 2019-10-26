@@ -471,3 +471,11 @@ createdb trivia_test
 psql trivia_test < trivia.psql
 python test_flaskr.py
 ```
+
+## Authors
+
+Yours truly, Coach Caryn, Student Kane
+
+## Acknowledgements
+
+The awesome team at Udacity and Coach Caryn, all the coaches, assistants and all the classmates.
