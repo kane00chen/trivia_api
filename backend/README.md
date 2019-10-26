@@ -63,7 +63,7 @@ Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` d
 
 Errors are returned as JSON objects in the following format:
 
-'''bash
+'''
 {
     "success": False,
     "error": 404,
@@ -82,10 +82,11 @@ The API will return two error types when requests fail:
 ### Endpoints
 
 #### GET '/categories'
+
 - Fetches a list of dictionaries of categories in which the keys are the ids and the value is the corresponding string of the category.
 - Request Arguments: None
 - Returns: A list of dictionaries of categories. Each dictionary has two keys. One key is 'id', the value is the id number. The other key is 'type', value is category_string.
-'''bash
+'''
 C:\>curl http://127.0.0.1:5000/categories
 {
   "categories": [
@@ -119,10 +120,11 @@ C:\>curl http://127.0.0.1:5000/categories
 '''
 
 #### GET & POST '/questions'
+
 - If the method is 'GET', the API fetches all questions in the database. 
 - Request Arguments: None
 - Returns: A pagenationary of questions list , dictionary of categories , number of total questions and 'success'= True.
-'''bash
+'''
 C:\>curl http://127.0.0.1:5000/questions
 {
   "categories": {
@@ -209,10 +211,11 @@ C:\>curl http://127.0.0.1:5000/questions
   "totalQuestions": 28
 }
 '''
+
 - If the method is 'POST', the API starts a search by the input. 
 - Request Arguments: searchTerm
 - Returns: A pagenationary of questions list insensibly include the given searchTerm, dictionary of categories , number of total questions in the search results and 'success'= True.
-'''bash
+'''
 C:\>curl -X POST -H "Content-Type:application/json" -d "{\"searchTerm\": \"title\"}" http://127.0.0.1:5000/questions
 {
   "categories": {
@@ -245,10 +248,11 @@ C:\>curl -X POST -H "Content-Type:application/json" -d "{\"searchTerm\": \"title
 '''
 
 #### GET '/categories/<int:id>'
+
 - Fetches all questions in a category.
 - Request Arguments: Category_id(from 1 to 6).
 - Returns: A list of dictionaries of questions. Also returns currentCategory, current page, total questions based by current category and success info.
-'''bash
+'''
 C:\>curl http://127.0.0.1:5000/categories/1
 {
   "currentCategory": 1,
@@ -282,10 +286,11 @@ C:\>curl http://127.0.0.1:5000/categories/1
 '''
 
 #### GET '/categories/<int:category_id>'
+
 - Fetches all questions in a category.
 - Request Arguments: category_id(from 1 to 6).
 - Returns: A list of dictionaries of questions. Also returns currentCategory, current page, total questions based by current category and success info.
-'''bash
+'''
 C:\>curl http://127.0.0.1:5000/categories/1
 {
   "currentCategory": 1,
@@ -319,10 +324,11 @@ C:\>curl http://127.0.0.1:5000/categories/1
 '''
 
 #### DELETE '/questions/<int:question_id>'
+
 - Delete a question by the question_id.
 - Request Arguments: question_id
 - Returns: Deleted question id, remained total questions number and success info.
-'''bash
+'''
 C:\>curl -X DELETE http://127.0.0.1:5000/questions/37
 {
   "deleted": 37,
@@ -332,10 +338,11 @@ C:\>curl -X DELETE http://127.0.0.1:5000/questions/37
 '''
 
 #### POST '/add'
+
 - Create a new question by inputtings of question and answer text, category, and difficulty score.
 - Request Arguments: question, answer, category, difficulty score
 - Returns: Created question id, total questions number after creation, pagenational questions list and success info.
-'''bash
+'''
 C:\>curl -X POST -H "Content-Type:application/json" -d "{\"question\": \"new question example23\", \"answer\": \"answer of example23\", \"category\": \"5\", \"difficulty\": 4}" http://127.0.0.1:5000/add
 {
   "created": 38,
@@ -417,10 +424,11 @@ C:\>curl -X POST -H "Content-Type:application/json" -d "{\"question\": \"new que
 '''
 
 #### GET '/play'
+
 - Fetches a dictionary of categories.
 - Request Arguments: None
 - Returns: A dictionary of categories and success info.
-'''bash
+'''
 C:\>curl http://127.0.0.1:5000/play
 {
   "categories": {
@@ -436,10 +444,11 @@ C:\>curl http://127.0.0.1:5000/play
 '''
 
 #### POST '/play/getnextquestion'
+
 - POST a category id from 0~6, 0 stands for all categories. Returns a random question selected from selected category or all categories till none questions remain.
 - Request Arguments: previous_questions, quiz_category.ID
 - Returns: A random question selected from selected category/categories till none questions remain. And success info.
-'''bash
+'''
 C:\>curl -X POST -H "Content-Type:application/json" -d "{\"previous_questions\": [], \"quiz_category\": {\"type\": \"Science\", \"id\": \"1\"}}" http://127.0.0.1:5000/play/getnextquestion
 {
   "question": {
@@ -451,53 +460,6 @@ C:\>curl -X POST -H "Content-Type:application/json" -d "{\"previous_questions\":
   },
   "success": true
 }
-'''
-
-#### ERRORHANDLER
-
-- Created 5 error handlers including 400, 404, 405, 422 and 500. 
-
-'''bash
-  @app.errorhandler(400)
-  def unprocessable(error):
-    return jsonify({
-      "success": False,
-      "error": 400,
-      "message": "bad request"
-    }), 400
-
-  @app.errorhandler(404)
-  def resource_not_found(error):
-    return jsonify({
-      "success": False,
-      "error": 404,
-      "message": "resource not found"
-    }), 404
-
-  @app.errorhandler(405)
-  def unprocessable(error):
-    return jsonify({
-      "success": False,
-      "error": 405,
-      "message": "method not allowed"
-    }), 405
-  
-  @app.errorhandler(422)
-  def unprocessable(error):
-    return jsonify({
-      "success": False,
-      "error": 422,
-      "message": "unprocessable"
-    }), 422
-
-  @app.errorhandler(500)
-  def unprocessable(error):
-    return jsonify({
-      "success": False,
-      "error": 500,
-      "message": "internal server error"
-    }), 500
-   
 '''
 
 ## Testing
