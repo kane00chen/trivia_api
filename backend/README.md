@@ -16,7 +16,7 @@ We recommend working within a virtual environment whenever using Python for proj
 
 Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
 
-```bash
+```
 pip install -r requirements.txt
 ```
 
@@ -32,7 +32,7 @@ This will install all of the required packages we selected within the `requireme
 
 ## Database Setup
 With Postgres running, restore a database using the trivia.psql file provided. From the backend folder in terminal run:
-```bash
+```
 psql trivia < trivia.psql
 ```
 
@@ -42,7 +42,7 @@ From within the `backend` directory first ensure you are working using your crea
 
 To run the server, execute:
 
-```bash
+```
 export FLASK_APP=flaskr
 export FLASK_ENV=development
 flask run
@@ -56,20 +56,20 @@ Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` d
 
 ### Getting Started
 
-- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, '''bash http://127.0.0.1:5000/''', which is set as a proxy in the frontend configuration.
+- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, ``` http://127.0.0.1:5000/```, which is set as a proxy in the frontend configuration.
 - Authentication: This version of the application does not require authentication or API keys.
 
 ### Error Handling
 
 Errors are returned as JSON objects in the following format:
 
-'''
+```
 {
     "success": False,
     "error": 404,
     "message": "resource not found"
 }
-'''
+```
 
 The API will return two error types when requests fail:
 
@@ -86,7 +86,7 @@ The API will return two error types when requests fail:
 - Fetches a list of dictionaries of categories in which the keys are the ids and the value is the corresponding string of the category.
 - Request Arguments: None
 - Returns: A list of dictionaries of categories. Each dictionary has two keys. One key is 'id', the value is the id number. The other key is 'type', value is category_string.
-'''
+```
 C:\>curl http://127.0.0.1:5000/categories
 {
   "categories": [
@@ -117,14 +117,14 @@ C:\>curl http://127.0.0.1:5000/categories
   ],
   "success": true
 }
-'''
+```
 
 #### GET & POST '/questions'
 
 - If the method is 'GET', the API fetches all questions in the database. 
 - Request Arguments: None
 - Returns: A pagenationary of questions list , dictionary of categories , number of total questions and 'success'= True.
-'''
+```
 C:\>curl http://127.0.0.1:5000/questions
 {
   "categories": {
@@ -210,12 +210,12 @@ C:\>curl http://127.0.0.1:5000/questions
   "success": true,
   "totalQuestions": 28
 }
-'''
+```
 
 - If the method is 'POST', the API starts a search by the input. 
 - Request Arguments: searchTerm
 - Returns: A pagenationary of questions list insensibly include the given searchTerm, dictionary of categories , number of total questions in the search results and 'success'= True.
-'''
+```
 C:\>curl -X POST -H "Content-Type:application/json" -d "{\"searchTerm\": \"title\"}" http://127.0.0.1:5000/questions
 {
   "categories": {
@@ -245,14 +245,14 @@ C:\>curl -X POST -H "Content-Type:application/json" -d "{\"searchTerm\": \"title
   "success": true,
   "totalQuestions": 2
 }
-'''
+```
 
 #### GET '/categories/<int:id>'
 
 - Fetches all questions in a category.
 - Request Arguments: Category_id(from 1 to 6).
 - Returns: A list of dictionaries of questions. Also returns currentCategory, current page, total questions based by current category and success info.
-'''
+```
 C:\>curl http://127.0.0.1:5000/categories/1
 {
   "currentCategory": 1,
@@ -283,14 +283,14 @@ C:\>curl http://127.0.0.1:5000/categories/1
   "success": true,
   "totalQuestions": 3
 }
-'''
+```
 
 #### GET '/categories/<int:category_id>'
 
 - Fetches all questions in a category.
 - Request Arguments: category_id(from 1 to 6).
 - Returns: A list of dictionaries of questions. Also returns currentCategory, current page, total questions based by current category and success info.
-'''
+```
 C:\>curl http://127.0.0.1:5000/categories/1
 {
   "currentCategory": 1,
@@ -321,28 +321,28 @@ C:\>curl http://127.0.0.1:5000/categories/1
   "success": true,
   "totalQuestions": 3
 }
-'''
+```
 
 #### DELETE '/questions/<int:question_id>'
 
 - Delete a question by the question_id.
 - Request Arguments: question_id
 - Returns: Deleted question id, remained total questions number and success info.
-'''
+```
 C:\>curl -X DELETE http://127.0.0.1:5000/questions/37
 {
   "deleted": 37,
   "success": true,
   "totalQuestions": 27
 }
-'''
+```
 
 #### POST '/add'
 
 - Create a new question by inputtings of question and answer text, category, and difficulty score.
 - Request Arguments: question, answer, category, difficulty score
 - Returns: Created question id, total questions number after creation, pagenational questions list and success info.
-'''
+```
 C:\>curl -X POST -H "Content-Type:application/json" -d "{\"question\": \"new question example23\", \"answer\": \"answer of example23\", \"category\": \"5\", \"difficulty\": 4}" http://127.0.0.1:5000/add
 {
   "created": 38,
@@ -421,14 +421,14 @@ C:\>curl -X POST -H "Content-Type:application/json" -d "{\"question\": \"new que
   "success": true,
   "total_questions": 28
 }
-'''
+```
 
 #### GET '/play'
 
 - Fetches a dictionary of categories.
 - Request Arguments: None
 - Returns: A dictionary of categories and success info.
-'''
+```
 C:\>curl http://127.0.0.1:5000/play
 {
   "categories": {
@@ -441,14 +441,14 @@ C:\>curl http://127.0.0.1:5000/play
   },
   "success": true
 }
-'''
+```
 
 #### POST '/play/getnextquestion'
 
 - POST a category id from 0~6, 0 stands for all categories. Returns a random question selected from selected category or all categories till none questions remain.
 - Request Arguments: previous_questions, quiz_category.ID
 - Returns: A random question selected from selected category/categories till none questions remain. And success info.
-'''
+```
 C:\>curl -X POST -H "Content-Type:application/json" -d "{\"previous_questions\": [], \"quiz_category\": {\"type\": \"Science\", \"id\": \"1\"}}" http://127.0.0.1:5000/play/getnextquestion
 {
   "question": {
@@ -460,7 +460,7 @@ C:\>curl -X POST -H "Content-Type:application/json" -d "{\"previous_questions\":
   },
   "success": true
 }
-'''
+```
 
 ## Testing
 
